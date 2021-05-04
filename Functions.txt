@@ -1,0 +1,66 @@
+System functions of Vxworks
+ 
+(1)semBCreate( ):分配并初始化一个二进制信号量,函数原型为:
+SEM_ID 
+semBCreate
+(int options, /*信号量选项*/
+SEM_B_STATE initialState /*信号量初始化状态值*/
+) ;
+
+(2)semMCreate( ):分配并初始化一个互斥信号量,函数原型为:
+SEM_ID
+semMCreate
+(
+int
+options,
+/*信号量选项*/
+SEM_B_STATE initialState /*信号量初始化状态值*/
+);
+
+(3)semCCreate( ):分配并初始化一个计数信号量,函数原型为:
+SEM_ID
+semCCreate
+(
+int
+options,
+/*信号量选项*/
+int
+initialCount /*信号量初始计数值*/
+) ;
+
+
+
+
+//设置任务优先级
+extern STATUS
+taskOptionsSet (int tid, int mask, int newOptions);
+//获得任务优先级
+extern STATUS
+taskOptionsGet (int tid, int *pOptions);
+//从任务 ID 获得任务名
+extern char *
+taskName (int tid);
+//从任务名获得任务 ID
+extern int taskNameToId (char *name);
+//确认 ID 为 tid 的任务是否存在
+extern STATUS
+taskIdVerify (int tid);
+//获得任务自身 ID
+extern int taskIdSelf (void);
+//任务状态是否为 ready
+extern BOOL
+taskIsReady (int tid);
+//任务状态是否为 Suspended
+extern BOOL
+taskIsSuspended (int tid);
+//获得任务的 TCB 指针
+extern WIND_TCB *taskTcb (int tid);
+//获得任务的优先级
+STATUS taskPrioritySet (int tid, /* task ID */ int newPriority /* new priority
+*/ );
+//任务锁定与解锁:一个任务调用 taskLock()后,任务运行时将没有基于
+优先级的抢占发生;而 taskUnlock()则用于恢复锁定。
+extern STATUS
+extern STATUS
+taskLock (void);
+taskUnlock (void);

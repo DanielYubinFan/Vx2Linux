@@ -1,0 +1,2 @@
+//pipe uses linux FIFO
+
